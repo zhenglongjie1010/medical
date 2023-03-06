@@ -1,0 +1,3 @@
+# Project exclude paths
+/medical-client/node_modules/
+/medical-doctor/node_modules/

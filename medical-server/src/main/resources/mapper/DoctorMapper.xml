@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.javaclimb.medical.dao.DoctorMapper">
+    <resultMap id="BaseResultMap" type="com.javaclimb.medical.domain.Doctor" >
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="sex" jdbcType="TINYINT" property="sex"/>
+        <result column="birth" jdbcType="TIMESTAMP" property="birth"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="tel" jdbcType="VARCHAR" property="tel"/>
+        <result column="depart" jdbcType="VARCHAR" property="depart"/>
+        <result column="introduction" jdbcType="VARCHAR" property="introduction"/>
+        <result column="picture" jdbcType="VARCHAR" property="picture"/>
+        <result column="number" jdbcType="INTEGER" property="number"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,name,password,sex,birth,title,tel,depart,introduction,picture,number
+    </sql>
+
+    <insert id="insert" parameterType="com.javaclimb.medical.domain.Doctor">
+        insert into doctor
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id!= null">
+                id,
+            </if>
+            <if test="name!= null">
+                name,
+            </if>
+            <if test="password!= null">
+                password,
+            </if>
+            <if test="sex!= null">
+                sex,
+            </if>
+            <if test="birth!= null">
+                birth,
+            </if>
+            <if test="title!= null">
+                title,
+            </if>
+            <if test="tel!= null">
+                tel,
+            </if>
+            <if test="depart!= null">
+                depart,
+            </if>
+            <if test="introduction!= null">
+                introduction,
+            </if>
+            <if test="picture!= null">
+                picture,
+            </if>
+            <if test="number!= null">
+                number,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id!= null">
+                #{id},
+            </if>
+            <if test="name!= null">
+                #{name},
+            </if>
+            <if test="password!= null">
+                #{password},
+            </if>
+            <if test="sex!= null">
+                #{sex},
+            </if>
+            <if test="birth!= null">
+                #{birth},
+            </if>
+            <if test="title!= null">
+                #{title},
+            </if>
+            <if test="tel!= null">
+                #{tel},
+            </if>
+            <if test="depart!= null">
+                #{depart},
+            </if>
+            <if test="introduction!= null">
+                #{introduction},
+            </if>
+            <if test="picture!= null">
+                #{picture},
+            </if>
+            <if test="number!= null">
+                #{number},
+            </if>
+        </trim>
+    </insert>
+
+
+
+    <update id="update" parameterType="com.javaclimb.medical.domain.Doctor">
+        update doctor
+        <set>
+            <if test="id!= null">
+               id = #{id},
+            </if>
+            <if test="name!= null">
+               name = #{name},
+            </if>
+            <if test="password!= null">
+              password = #{password},
+            </if>
+            <if test="sex!= null">
+              sex = #{sex},
+            </if>
+            <if test="birth!= null">
+               birth = #{birth},
+            </if>
+            <if test="title!= null">
+               title = #{title},
+            </if>
+            <if test="tel!= null">
+               tel = #{tel},
+            </if>
+            <if test="depart!= null">
+               depart = #{depart},
+            </if>
+            <if test="introduction!= null">
+                introduction = #{introduction},
+            </if>
+            <if test="picture!= null">
+                picture = #{picture},
+            </if>
+            <if test="number!= null">
+                number = #{number},
+            </if>
+
+        </set>
+        where  id =#{id}
+    </update>
+
+
+
+    <delete id="delete" parameterType="java.lang.Integer">
+        delete from doctor
+        where id=#{id}
+    </delete>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"></include>
+        from doctor
+        where id=#{id};
+    </select>
+
+    <select id="alldoctor" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"></include>
+        from doctor
+    </select>
+
+    <select id="DoctorOfDepart" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"></include>
+        from doctor
+        where depart like #{depart}
+    </select>
+
+    <select id="DoctorOfName" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"></include>
+        from doctor
+        where name like #{name}
+    </select>
+
+    <select id="doctorOfSex" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"></include>
+        from doctor
+        where sex like #{sex}
+    </select>
+
+    <select id="verifyPassword" resultType="java.lang.Integer">
+        select count(*) from doctor where name=#{name} and password=#{password}
+    </select>
+
+    <select id="getByDoctor" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"></include>
+        from Doctor
+        where name = #{name}
+    </select>
+
+</mapper>
